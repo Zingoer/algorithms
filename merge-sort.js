@@ -1,3 +1,4 @@
+// The idea
 function mergeSort(nums) {
   let length = nums.length;
   console.log(`length: ${length}`);
@@ -49,3 +50,41 @@ function mergeSort(nums) {
 
 var nums = [10,5,3,8,2,6,4,7,9,1];
 var ans = mergeSort(nums);
+
+// With JS Util functions
+let mergeSort2 = (nums) =>  {
+  let length = nums.length;
+  console.log(`length: ${length}`);
+  // Base
+  if(length <= 1){
+    return nums;
+  }
+  
+  let mid = Math.floor(nums.length/2);
+  
+  let left = nums.slice(0, mid);
+  let right = nums.slice(mid);
+
+  left = mergeSort(left);
+  right = mergeSort(right);
+  console.log(`left:${left}`);
+  console.log(`right:${right}`);
+  
+  return stitch(mergeSort(left), mergeSort(right));
+}
+
+let stitch = (left, right) => {
+  let result = [];
+  while(left.length && right.length){
+    if(left[0] < right[0]){
+      result.push(left.shift());
+    }else{
+      result.push(right.shift());
+    }
+  }
+  
+  return result.concat(left, right);
+}
+
+var nums2 = [10,5,3,8,2,6,4,7,9,1];
+var ans2 = mergeSort2(nums);
