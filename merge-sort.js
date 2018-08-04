@@ -96,6 +96,8 @@ let stitch = (left, right) => {
   }
   
   // If one array is used up, then add the rest of the other array to the end of the result
+  // Or fancy one
+  // return [...result, ...left, ...right];
   return result.concat(left, right);
 }
 
