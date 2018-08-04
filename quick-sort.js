@@ -1,3 +1,4 @@
+// Quick sort inside the array
 const quickSort = (input, start, end) => {
   // Divide the array to two sub arrays by pivot
   if(start < end){
@@ -41,3 +42,33 @@ const swap = (input, x, y) => {
 
 const input = [10, 8, 2, 1, 6, 3, 9, 4, 7, 5];
 const answer = quickSort(input, 0, input.length-1);
+
+const quickSort2 = (input) => {
+  
+  console.log(`before sort ${input}`);
+  if(input.length <= 1){
+    return input;
+  }
+  
+  let lastIndex = input.length-1;
+  // Divide the array to two sub arrays by pivot
+  let pivot = input[lastIndex];
+  let left = [];
+  let right = [];
+ 
+  for(let i = 0; i<lastIndex-1; i++){
+    if(input[i] < pivot){
+      left.push(input[i]);
+    }else{
+      right.push(input[i]);
+    }
+  }
+  console.log(`After partition left: ${left}`);
+  console.log(`After partition right: ${right}`);
+  console.log(`After partition pivot: ${pivot}`);
+  
+  return [...quickSort(left), pivot, ...quickSort(right)];
+}
+
+const input = [10, 8, 2, 1, 6, 3, 9, 4, 7, 5];
+const answer = quickSort2(input);
