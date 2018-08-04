@@ -7,15 +7,19 @@ function mergeSort(nums) {
     return nums;
   }
   
+  // Split nums to two array around middle point
   let lengthOfA = Math.floor(nums.length/2);
   let lengthOfB = length - lengthOfA;
   console.log(`a length: ${lengthOfA}`);
   console.log(`b length: ${lengthOfB}`);
   
+  // Left array from 0 to middle point
   let a = [];
   for(let i = 0; i < lengthOfA; i++){
     a.push(nums[i]);
   }
+  
+  // Right array from middle point to the end
   let b = [];
   for(let i = lengthOfA; i < length; i++){
     b.push(nums[i]);
@@ -25,17 +29,23 @@ function mergeSort(nums) {
   console.log(`a:${a}`);
   console.log(`b:${b}`);
   
+  // Merge the two arrays back to one
   let p = 0;
   let q = 0;
   for(let i = 0; i < length; i++){
     console.log(`i: ${i}, p: ${p}, q: ${q}, a value: ${a[p]}, b value: ${b[q]}`);
+    // Only add b to the end of result array because a is used up
     if(p >= lengthOfA){
       nums[i] = b[q];
       q++;
-    }else if(q >= lengthOfB){
+    }
+    // Only add a to the end of result array because b is used up
+    else if(q >= lengthOfB){
       nums[i] = a[p];
       p++;
-    }else if (a[p] < b[q]){
+    }
+    // Add the smaller one to the end of result array
+    else if (a[p] < b[q]){
       nums[i] = a[p];
       p++;
     }else{
@@ -77,12 +87,15 @@ let stitch = (left, right) => {
   let result = [];
   while(left.length && right.length){
     if(left[0] < right[0]){
+      // pop the first one in the left array and push it into result
       result.push(left.shift());
     }else{
+      // pop the first one in the right array and push it into result
       result.push(right.shift());
     }
   }
   
+  // If one array is used up, then add the rest of the other array to the end of the result
   return result.concat(left, right);
 }
 
