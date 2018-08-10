@@ -15,7 +15,7 @@ const heapSort = array => {
 const createMaxHeap = array => {
   // code
   let length = array.length;
-  let startPoint = Math.floor(length/2) - 1;
+  let startPoint = Math.floor(length/2);
   for(let i = startPoint; i >= 0; i--){
     heapify(array, i, length);
   }
@@ -33,11 +33,14 @@ const heapify = (array, index, heapSize) => {
   if(r < heapSize && array[r] > array[largest]){
     largest = r;
   }
+  
   // node is the largest
-  if(largest === index) return;
-  // swap the node value down and swap the bigger value up
-  swap(array, index, largest);
-  heapify(array, largest, heapSize);
+  if(largest !== index) {
+    // swap the node value down and swap the bigger value up
+    swap(array, index, largest);
+    heapify(array, largest, heapSize);
+  }
+  
   snapshot(array);
 };
 
